@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
@@ -5,7 +6,7 @@ const multer = require("multer")
 const path = require("path")
 
 const app = express()
-const port = 5000
+const port = process.env.PORT || 5000
 
 app.use(express.json())
 app.use(cors())
@@ -14,7 +15,7 @@ app.use(cors())
 app.use("/images", express.static("images"))
 
 // MongoDB Connection
-mongoose.connect("mongodb://localhost:27017/hotel")
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/hotel")
 .then(() => {
     console.log("DB Connected")
 })
